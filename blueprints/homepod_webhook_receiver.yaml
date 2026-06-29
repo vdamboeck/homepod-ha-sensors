@@ -7,8 +7,6 @@ blueprint:
     Dezimaltrenner werden automatisch normalisiert (Komma → Punkt).
   domain: automation
   source_url: https://github.com/vdamboeck/homepod-ha-sensors/blob/main/blueprints/homepod_webhook_receiver.yaml
-  homeassistant:
-    min_version: "2024.8.0"
   input:
     webhook_id:
       name: Webhook-ID

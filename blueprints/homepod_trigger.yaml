@@ -6,8 +6,6 @@ blueprint:
     die Automation aus, die die HomePod-Sensordaten per Webhook an HA schickt.
   domain: automation
   source_url: https://github.com/vdamboeck/homepod-ha-sensors/blob/main/blueprints/homepod_trigger.yaml
-  homeassistant:
-    min_version: "2024.8.0"
   input:
     boolean_helper:
       name: Boolean Helper (Trigger)
