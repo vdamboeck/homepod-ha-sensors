@@ -78,6 +78,16 @@ Dieser Workflow überbrückt die Lücke über drei Stufen:
 | `sensor.homepod_X_luftfeuchtigkeit` | Template-Sensor mit device_class + Statistiken |
 | `sensor.homepod_X_absolute_luftfeuchtigkeit` | Berechnet aus T + RH (Magnus-Formel) |
 
+## Warum 5 Minuten Polling-Intervall?
+
+Drei Gründe sprechen gegen ein kürzeres Intervall:
+
+- **HomePod-Sensoren aktualisieren nicht sekundengenau.** Die interne Aktualisierungsrate liegt deutlich unter einem Minutentakt — ein häufigeres Polling würde denselben Wert wiederholt abrufen.
+- **Apple Home drosselt zu häufige Automationsläufe.** In der Praxis liegt das Minimum bei 2–3 Minuten; darunter werden Ausführungen stillschweigend übersprungen.
+- **Für typische Anwendungsfälle reichen 5 Minuten aus.** Temperatur und Luftfeuchtigkeit in Innenräumen ändern sich langsam. Automationen, die auf diesen Werten basieren (z. B. Lüftungshinweise), reagieren mit 5-Minuten-Daten genauso zuverlässig wie mit 1-Minuten-Daten.
+
+5 Minuten ist der empfohlene Standardwert — er lässt ausreichend Abstand zur Apple-Home-Drosselgrenze und ist für alle gängigen Anwendungsfälle mehr als ausreichend. Das Intervall ist im Trigger-Blueprint frei konfigurierbar.
+
 ## Warum zwei Schichten (input_number + Template-Sensor)?
 
 Template-Sensoren sind schreibgeschützt — eine Automation kann keinen Wert direkt in einen Template-Sensor schreiben. Der `input_number` ist der einzige schreibbare Zwischenspeicher, in den eine Automation per `input_number.set_value` schreiben kann. Der Template-Sensor liest diesen Wert und verleiht ihm `device_class`, `unit_of_measurement` und `state_class` — damit werden Einheitenkonvertierung, korrekte UI-Darstellung und Langzeitstatistiken möglich.

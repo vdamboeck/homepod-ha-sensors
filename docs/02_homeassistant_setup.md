@@ -101,7 +101,7 @@ Nach dem Import:
 1. Öffne **Einstellungen → Automationen → Blueprint-Automation erstellen → HomePod Sensor – Trigger**
 2. Konfiguriere:
    - **Boolean Helper:** wähle den in Schritt 1a angelegten Helper (`input_boolean.homepod_trigger`)
-   - **Polling-Intervall:** Standard 5 Minuten empfohlen
+   - **Polling-Intervall:** Standard 5 Minuten empfohlen — Apple Home drosselt häufigere Automationsläufe, das Minimum liegt bei ca. 2–3 Minuten; außerdem aktualisieren HomePod-Sensoren intern nicht sekundengenau, sodass kürzere Intervalle keinen Mehrwert bringen (siehe [`01_setup_overview.md`](01_setup_overview.md))
    - **Einschaltdauer:** Standard 3 Sekunden empfohlen
 3. Speichern
 
