@@ -1,0 +1,74 @@
+# =============================================================================
+# HomePod HA Sensors — Template-Sensoren
+# =============================================================================
+# Template-Sensoren wandeln die beschreibbaren input_number-Helper in echte
+# Sensoren mit device_class, unit_of_measurement und state_class um.
+# Das ermöglicht korrekte UI-Darstellung, Einheitenkonvertierung und
+# Langzeitstatistiken (History-Graphen).
+#
+# In Home Assistant anlegen:
+# Einstellungen → Geräte & Dienste → Helper → Helper erstellen → Template
+# Oder: configuration.yaml → template: → sensor:
+#
+# Passe die Entity-IDs der input_number-Helper an deine eigenen an.
+# =============================================================================
+
+template:
+  - sensor:
+
+      # ── HomePod 1 — Temperatur ──────────────────────────────────────────
+      - name: "HomePod 1 Temperatur"
+        unique_id: homepod_1_temperatur_sensor
+        state: "{{ states('input_number.homepod_1_temperatur') | float(0) }}"
+        unit_of_measurement: "°C"
+        device_class: temperature
+        state_class: measurement
+
+      # ── HomePod 1 — Luftfeuchtigkeit ───────────────────────────────────
+      - name: "HomePod 1 Luftfeuchtigkeit"
+        unique_id: homepod_1_luftfeuchtigkeit_sensor
+        state: "{{ states('input_number.homepod_1_luftfeuchtigkeit') | float(0) }}"
+        unit_of_measurement: "%"
+        device_class: humidity
+        state_class: measurement
+
+      # ── HomePod 1 — Absolute Luftfeuchtigkeit (berechnet) ──────────────
+      # Magnus-Formel: liefert absolute Luftfeuchtigkeit in g/m³
+      # Benötigt sensor.homepod_1_temperatur und sensor.homepod_1_luftfeuchtigkeit.
+      - name: "HomePod 1 Absolute Luftfeuchtigkeit"
+        unique_id: homepod_1_absolute_luftfeuchtigkeit_sensor
+        state: >
+          {% set T  = states('sensor.homepod_1_temperatur') | float(0) %}
+          {% set RH = states('sensor.homepod_1_luftfeuchtigkeit') | float(0) %}
+          {{ (13.239 * RH * 2.718281828 ** (17.67 * T / (243.5 + T)) / (273.15 + T)) | round(2) }}
+        unit_of_measurement: "g/m³"
+        device_class: absolute_humidity
+        state_class: measurement
+
+
+      # ── HomePod 2 (Vorlage — auskommentiert) ───────────────────────────
+      # Kopiere diesen Block und ersetze alle homepod_2_ durch homepod_3_ usw.
+
+      # - name: "HomePod 2 Temperatur"
+      #   unique_id: homepod_2_temperatur_sensor
+      #   state: "{{ states('input_number.homepod_2_temperatur') | float(0) }}"
+      #   unit_of_measurement: "°C"
+      #   device_class: temperature
+      #   state_class: measurement
+      #
+      # - name: "HomePod 2 Luftfeuchtigkeit"
+      #   unique_id: homepod_2_luftfeuchtigkeit_sensor
+      #   state: "{{ states('input_number.homepod_2_luftfeuchtigkeit') | float(0) }}"
+      #   unit_of_measurement: "%"
+      #   device_class: humidity
+      #   state_class: measurement
+      #
+      # - name: "HomePod 2 Absolute Luftfeuchtigkeit"
+      #   unique_id: homepod_2_absolute_luftfeuchtigkeit_sensor
+      #   state: >
+      #     {% set T  = states('sensor.homepod_2_temperatur') | float(0) %}
+      #     {% set RH = states('sensor.homepod_2_luftfeuchtigkeit') | float(0) %}
+      #     {{ (13.239 * RH * 2.718281828 ** (17.67 * T / (243.5 + T)) / (273.15 + T)) | round(2) }}
+      #   unit_of_measurement: "g/m³"
+      #   device_class: absolute_humidity
+      #   state_class: measurement

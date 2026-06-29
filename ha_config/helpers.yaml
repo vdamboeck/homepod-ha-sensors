@@ -1,0 +1,88 @@
+# =============================================================================
+# HomePod HA Sensors — Helper-Konfiguration
+# =============================================================================
+# Diese Datei enthält alle Helper als Referenz zum Kopieren.
+# In Home Assistant werden Helper am einfachsten über die UI angelegt:
+# Einstellungen → Geräte & Dienste → Helper → Helper erstellen
+#
+# Die YAML-Blöcke dienen als Vorlage für die korrekten Einstellungen.
+# =============================================================================
+
+
+# =============================================================================
+# EINMALIG — Unabhängig von der Anzahl der HomePods
+# =============================================================================
+
+# Boolean Helper — Trigger-Signal für Apple Home
+# Typ:  Schalter (input_boolean)
+# Muss über HomeKit Bridge in Apple Home sichtbar sein.
+input_boolean:
+  homepod_trigger:
+    name: HomePod Trigger
+    icon: mdi:toggle-switch
+
+
+# =============================================================================
+# PRO HOMPOD — Für jeden HomePod einmal anlegen
+# Passe den Präfix (homepod_1_) für jeden weiteren HomePod an,
+# z. B. homepod_2_, homepod_3_ usw.
+# =============================================================================
+
+# ── HomePod 1 ────────────────────────────────────────────────────────────────
+
+input_number:
+  homepod_1_temperatur:
+    name: HomePod 1 Temperatur
+    icon: mdi:thermometer
+    min: -20
+    max: 60
+    step: 0.1
+    unit_of_measurement: "°C"
+    mode: box
+
+  homepod_1_luftfeuchtigkeit:
+    name: HomePod 1 Luftfeuchtigkeit
+    icon: mdi:water-percent
+    min: 0
+    max: 100
+    step: 0.1
+    unit_of_measurement: "%"
+    mode: box
+
+input_datetime:
+  homepod_1_letzte_aktualisierung:
+    name: HomePod 1 Letzte Aktualisierung
+    icon: mdi:clock-outline
+    has_date: true
+    has_time: true
+
+
+# ── HomePod 2 (Vorlage — auskommentiert) ─────────────────────────────────────
+# Kopiere diesen Block für jeden weiteren HomePod und ersetze den Präfix
+# homepod_2_ durch homepod_3_, homepod_4_ usw.
+
+# input_number:
+#   homepod_2_temperatur:
+#     name: HomePod 2 Temperatur
+#     icon: mdi:thermometer
+#     min: -20
+#     max: 60
+#     step: 0.1
+#     unit_of_measurement: "°C"
+#     mode: box
+#
+#   homepod_2_luftfeuchtigkeit:
+#     name: HomePod 2 Luftfeuchtigkeit
+#     icon: mdi:water-percent
+#     min: 0
+#     max: 100
+#     step: 0.1
+#     unit_of_measurement: "%"
+#     mode: box
+#
+# input_datetime:
+#   homepod_2_letzte_aktualisierung:
+#     name: HomePod 2 Letzte Aktualisierung
+#     icon: mdi:clock-outline
+#     has_date: true
+#     has_time: true

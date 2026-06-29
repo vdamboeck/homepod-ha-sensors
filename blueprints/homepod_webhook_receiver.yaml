@@ -1,0 +1,338 @@
+blueprint:
+  name: HomePod Sensor – Webhook Empfänger
+  description: >
+    Empfängt eine einzige Webhook-Payload mit den Sensordaten aller HomePods
+    und schreibt jeden Wert in den zugehörigen numerischen Helper.
+    Unterstützt bis zu 5 HomePods. Slot 1 ist Pflicht, Slots 2–5 sind optional.
+    Dezimaltrenner werden automatisch normalisiert (Komma → Punkt).
+  domain: automation
+  source_url: https://github.com/vdamboeck/homepod-ha-sensors/blob/main/blueprints/homepod_webhook_receiver.yaml
+  min_version: "2024.8.0"
+  input:
+    webhook_id:
+      name: Webhook-ID
+      description: >
+        Die ID, unter der HA den Webhook registriert.
+        Die vollständige URL lautet: https://YOUR_HA_URL/api/webhook/DIESE_ID
+      default: homepod_daten
+      selector:
+        text:
+
+    # ── HomePod 1 (Pflicht) ─────────────────────────────────────────────────
+    slot_1:
+      name: "HomePod 1 (erforderlich)"
+      icon: mdi:speaker
+      input:
+        hp1_temp_key:
+          name: Payload-Schlüssel – Temperatur
+          description: >
+            Der JSON-Key in der Webhook-Payload für die Temperatur dieses HomePods.
+            Beispiel: homepod1_temperature
+          default: "homepod1_temperature"
+          selector:
+            text:
+
+        hp1_temp_helper:
+          name: Numerischer Helper – Temperatur
+          description: input_number, in den die Temperatur geschrieben wird.
+          selector:
+            entity:
+              domain: input_number
+
+        hp1_hum_key:
+          name: Payload-Schlüssel – Luftfeuchtigkeit
+          description: >
+            Der JSON-Key in der Webhook-Payload für die Luftfeuchtigkeit dieses HomePods.
+            Beispiel: homepod1_humidity
+          default: "homepod1_humidity"
+          selector:
+            text:
+
+        hp1_hum_helper:
+          name: Numerischer Helper – Luftfeuchtigkeit
+          description: input_number, in den die Luftfeuchtigkeit geschrieben wird.
+          selector:
+            entity:
+              domain: input_number
+
+    # ── HomePod 2 (optional) ────────────────────────────────────────────────
+    slot_2:
+      name: "HomePod 2 (optional)"
+      icon: mdi:speaker
+      collapsed: true
+      input:
+        hp2_temp_key:
+          name: Payload-Schlüssel – Temperatur
+          default: ""
+          selector:
+            text:
+
+        hp2_temp_helper:
+          name: Numerischer Helper – Temperatur
+          default:
+          selector:
+            entity:
+              domain: input_number
+
+        hp2_hum_key:
+          name: Payload-Schlüssel – Luftfeuchtigkeit
+          default: ""
+          selector:
+            text:
+
+        hp2_hum_helper:
+          name: Numerischer Helper – Luftfeuchtigkeit
+          default:
+          selector:
+            entity:
+              domain: input_number
+
+    # ── HomePod 3 (optional) ────────────────────────────────────────────────
+    slot_3:
+      name: "HomePod 3 (optional)"
+      icon: mdi:speaker
+      collapsed: true
+      input:
+        hp3_temp_key:
+          name: Payload-Schlüssel – Temperatur
+          default: ""
+          selector:
+            text:
+
+        hp3_temp_helper:
+          name: Numerischer Helper – Temperatur
+          default:
+          selector:
+            entity:
+              domain: input_number
+
+        hp3_hum_key:
+          name: Payload-Schlüssel – Luftfeuchtigkeit
+          default: ""
+          selector:
+            text:
+
+        hp3_hum_helper:
+          name: Numerischer Helper – Luftfeuchtigkeit
+          default:
+          selector:
+            entity:
+              domain: input_number
+
+    # ── HomePod 4 (optional) ────────────────────────────────────────────────
+    slot_4:
+      name: "HomePod 4 (optional)"
+      icon: mdi:speaker
+      collapsed: true
+      input:
+        hp4_temp_key:
+          name: Payload-Schlüssel – Temperatur
+          default: ""
+          selector:
+            text:
+
+        hp4_temp_helper:
+          name: Numerischer Helper – Temperatur
+          default:
+          selector:
+            entity:
+              domain: input_number
+
+        hp4_hum_key:
+          name: Payload-Schlüssel – Luftfeuchtigkeit
+          default: ""
+          selector:
+            text:
+
+        hp4_hum_helper:
+          name: Numerischer Helper – Luftfeuchtigkeit
+          default:
+          selector:
+            entity:
+              domain: input_number
+
+    # ── HomePod 5 (optional) ────────────────────────────────────────────────
+    slot_5:
+      name: "HomePod 5 (optional)"
+      icon: mdi:speaker
+      collapsed: true
+      input:
+        hp5_temp_key:
+          name: Payload-Schlüssel – Temperatur
+          default: ""
+          selector:
+            text:
+
+        hp5_temp_helper:
+          name: Numerischer Helper – Temperatur
+          default:
+          selector:
+            entity:
+              domain: input_number
+
+        hp5_hum_key:
+          name: Payload-Schlüssel – Luftfeuchtigkeit
+          default: ""
+          selector:
+            text:
+
+        hp5_hum_helper:
+          name: Numerischer Helper – Luftfeuchtigkeit
+          default:
+          selector:
+            entity:
+              domain: input_number
+
+variables:
+  hp2_temp_key:    !input hp2_temp_key
+  hp2_temp_helper: !input hp2_temp_helper
+  hp2_hum_key:     !input hp2_hum_key
+  hp2_hum_helper:  !input hp2_hum_helper
+  hp3_temp_key:    !input hp3_temp_key
+  hp3_temp_helper: !input hp3_temp_helper
+  hp3_hum_key:     !input hp3_hum_key
+  hp3_hum_helper:  !input hp3_hum_helper
+  hp4_temp_key:    !input hp4_temp_key
+  hp4_temp_helper: !input hp4_temp_helper
+  hp4_hum_key:     !input hp4_hum_key
+  hp4_hum_helper:  !input hp4_hum_helper
+  hp5_temp_key:    !input hp5_temp_key
+  hp5_temp_helper: !input hp5_temp_helper
+  hp5_hum_key:     !input hp5_hum_key
+  hp5_hum_helper:  !input hp5_hum_helper
+
+triggers:
+  - trigger: webhook
+    webhook_id: !input webhook_id
+    allowed_methods:
+      - POST
+    local_only: true
+
+actions:
+  # ── HomePod 1 — immer aktiv ─────────────────────────────────────────────
+  - action: input_number.set_value
+    target:
+      entity_id: !input hp1_temp_helper
+    data:
+      value: >
+        {{ trigger.json[hp1_temp_key] | string
+           | regex_replace('[^0-9,.]', '')
+           | replace(',', '.')
+           | float }}
+    variables:
+      hp1_temp_key: !input hp1_temp_key
+
+  - action: input_number.set_value
+    target:
+      entity_id: !input hp1_hum_helper
+    data:
+      value: >
+        {{ trigger.json[hp1_hum_key] | string
+           | regex_replace('[^0-9,.]', '')
+           | replace(',', '.')
+           | float }}
+    variables:
+      hp1_hum_key: !input hp1_hum_key
+
+  # ── HomePod 2 — optional ────────────────────────────────────────────────
+  - choose:
+      - conditions:
+          - condition: template
+            value_template: "{{ hp2_temp_key != '' and hp2_temp_helper not in [none, ''] }}"
+        sequence:
+          - action: input_number.set_value
+            target:
+              entity_id: !input hp2_temp_helper
+            data:
+              value: >
+                {{ trigger.json[hp2_temp_key] | string
+                   | regex_replace('[^0-9,.]', '')
+                   | replace(',', '.')
+                   | float }}
+          - action: input_number.set_value
+            target:
+              entity_id: !input hp2_hum_helper
+            data:
+              value: >
+                {{ trigger.json[hp2_hum_key] | string
+                   | regex_replace('[^0-9,.]', '')
+                   | replace(',', '.')
+                   | float }}
+
+  # ── HomePod 3 — optional ────────────────────────────────────────────────
+  - choose:
+      - conditions:
+          - condition: template
+            value_template: "{{ hp3_temp_key != '' and hp3_temp_helper not in [none, ''] }}"
+        sequence:
+          - action: input_number.set_value
+            target:
+              entity_id: !input hp3_temp_helper
+            data:
+              value: >
+                {{ trigger.json[hp3_temp_key] | string
+                   | regex_replace('[^0-9,.]', '')
+                   | replace(',', '.')
+                   | float }}
+          - action: input_number.set_value
+            target:
+              entity_id: !input hp3_hum_helper
+            data:
+              value: >
+                {{ trigger.json[hp3_hum_key] | string
+                   | regex_replace('[^0-9,.]', '')
+                   | replace(',', '.')
+                   | float }}
+
+  # ── HomePod 4 — optional ────────────────────────────────────────────────
+  - choose:
+      - conditions:
+          - condition: template
+            value_template: "{{ hp4_temp_key != '' and hp4_temp_helper not in [none, ''] }}"
+        sequence:
+          - action: input_number.set_value
+            target:
+              entity_id: !input hp4_temp_helper
+            data:
+              value: >
+                {{ trigger.json[hp4_temp_key] | string
+                   | regex_replace('[^0-9,.]', '')
+                   | replace(',', '.')
+                   | float }}
+          - action: input_number.set_value
+            target:
+              entity_id: !input hp4_hum_helper
+            data:
+              value: >
+                {{ trigger.json[hp4_hum_key] | string
+                   | regex_replace('[^0-9,.]', '')
+                   | replace(',', '.')
+                   | float }}
+
+  # ── HomePod 5 — optional ────────────────────────────────────────────────
+  - choose:
+      - conditions:
+          - condition: template
+            value_template: "{{ hp5_temp_key != '' and hp5_temp_helper not in [none, ''] }}"
+        sequence:
+          - action: input_number.set_value
+            target:
+              entity_id: !input hp5_temp_helper
+            data:
+              value: >
+                {{ trigger.json[hp5_temp_key] | string
+                   | regex_replace('[^0-9,.]', '')
+                   | replace(',', '.')
+                   | float }}
+          - action: input_number.set_value
+            target:
+              entity_id: !input hp5_hum_helper
+            data:
+              value: >
+                {{ trigger.json[hp5_hum_key] | string
+                   | regex_replace('[^0-9,.]', '')
+                   | replace(',', '.')
+                   | float }}
+
+mode: single
+max_exceeded: silent

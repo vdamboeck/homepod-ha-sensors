@@ -1,0 +1,67 @@
+blueprint:
+  name: HomePod Sensor – Trigger
+  description: >
+    Schaltet einen Boolean Helper in einem konfigurierbaren Intervall kurz ein und wieder aus.
+    Der Helper muss über die HomeKit Bridge in Apple Home sichtbar sein — er löst dort
+    die Automation aus, die die HomePod-Sensordaten per Webhook an HA schickt.
+  domain: automation
+  source_url: https://github.com/vdamboeck/homepod-ha-sensors/blob/main/blueprints/homepod_trigger.yaml
+  min_version: "2024.8.0"
+  input:
+    boolean_helper:
+      name: Boolean Helper (Trigger)
+      description: >
+        Der Input Boolean, der über HomeKit Bridge in Apple Home erscheint.
+        Er fungiert als Auslöser für die Apple-Home-Automation.
+      selector:
+        entity:
+          domain: input_boolean
+
+    interval_minutes:
+      name: Polling-Intervall
+      description: Wie oft Apple Home die HomePod-Sensoren abfragen soll.
+      default: 5
+      selector:
+        number:
+          min: 1
+          max: 60
+          step: 1
+          unit_of_measurement: min
+          mode: box
+
+    on_duration_seconds:
+      name: Einschaltdauer
+      description: >
+        Wie lange der Boolean Helper auf "Ein" bleibt, bevor er zurückgesetzt wird.
+        3 Sekunden sind in der Regel ausreichend, damit Apple Home die Zustandsänderung
+        sicher erkennt.
+      default: 3
+      selector:
+        number:
+          min: 1
+          max: 30
+          step: 1
+          unit_of_measurement: s
+          mode: box
+
+variables:
+  interval_minutes: !input interval_minutes
+
+triggers:
+  - trigger: time_pattern
+    minutes: "{{ '/' ~ interval_minutes }}"
+
+actions:
+  - action: input_boolean.turn_on
+    target:
+      entity_id: !input boolean_helper
+
+  - delay:
+      seconds: !input on_duration_seconds
+
+  - action: input_boolean.turn_off
+    target:
+      entity_id: !input boolean_helper
+
+mode: single
+max_exceeded: silent
