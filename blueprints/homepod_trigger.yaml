@@ -20,14 +20,22 @@ blueprint:
     interval_minutes:
       name: Polling-Intervall
       description: Wie oft Apple Home die HomePod-Sensoren abfragen soll.
-      default: 5
+      default: "/5"
       selector:
-        number:
-          min: 1
-          max: 60
-          step: 1
-          unit_of_measurement: min
-          mode: box
+        select:
+          options:
+            - label: "alle 2 Minuten"
+              value: "/2"
+            - label: "alle 3 Minuten"
+              value: "/3"
+            - label: "alle 5 Minuten (empfohlen)"
+              value: "/5"
+            - label: "alle 10 Minuten"
+              value: "/10"
+            - label: "alle 15 Minuten"
+              value: "/15"
+            - label: "alle 30 Minuten"
+              value: "/30"
 
     on_duration_seconds:
       name: Einschaltdauer
@@ -44,12 +52,9 @@ blueprint:
           unit_of_measurement: s
           mode: box
 
-variables:
-  interval_minutes: !input interval_minutes
-
 triggers:
   - trigger: time_pattern
-    minutes: "{{ '/' ~ interval_minutes }}"
+    minutes: !input interval_minutes
 
 actions:
   - action: input_boolean.turn_on

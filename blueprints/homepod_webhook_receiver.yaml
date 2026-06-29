@@ -184,6 +184,8 @@ blueprint:
               domain: input_number
 
 variables:
+  hp1_temp_key:    !input hp1_temp_key
+  hp1_hum_key:     !input hp1_hum_key
   hp2_temp_key:    !input hp2_temp_key
   hp2_temp_helper: !input hp2_temp_helper
   hp2_hum_key:     !input hp2_hum_key
@@ -219,8 +221,6 @@ actions:
            | regex_replace('[^0-9,.]', '')
            | replace(',', '.')
            | float }}
-    variables:
-      hp1_temp_key: !input hp1_temp_key
 
   - action: input_number.set_value
     target:
@@ -231,8 +231,6 @@ actions:
            | regex_replace('[^0-9,.]', '')
            | replace(',', '.')
            | float }}
-    variables:
-      hp1_hum_key: !input hp1_hum_key
 
   # ── HomePod 2 — optional ────────────────────────────────────────────────
   - choose:
