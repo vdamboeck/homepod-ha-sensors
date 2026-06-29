@@ -94,7 +94,7 @@ Die vollständigen Templates (inkl. Absolute Luftfeuchtigkeit via Magnus-Formel)
 
 ## Schritt 3: Trigger-Blueprint importieren
 
-[![Import Trigger Blueprint](https://my.home-assistant.io/badges/blueprint_import.svg)](https://my.home-assistant.io/redirect/blueprint_import/?url=https%3A%2F%2Fraw.githubusercontent.com%2Fvdamboeck%2Fhomepod-ha-sensors%2Fmain%2Fblueprints%2Fhomepod_trigger.yaml)
+[![Import Trigger Blueprint](https://my.home-assistant.io/badges/blueprint_import.svg)](https://my.home-assistant.io/redirect/blueprint_import/?url=https%3A%2F%2Fgithub.com%2Fvdamboeck%2Fhomepod-ha-sensors%2Fblob%2Fmain%2Fblueprints%2Fhomepod_trigger.yaml)
 
 Nach dem Import:
 
@@ -109,7 +109,7 @@ Nach dem Import:
 
 ## Schritt 4: Webhook-Blueprint importieren
 
-[![Import Webhook Blueprint](https://my.home-assistant.io/badges/blueprint_import.svg)](https://my.home-assistant.io/redirect/blueprint_import/?url=https%3A%2F%2Fraw.githubusercontent.com%2Fvdamboeck%2Fhomepod-ha-sensors%2Fmain%2Fblueprints%2Fhomepod_webhook_receiver.yaml)
+[![Import Webhook Blueprint](https://my.home-assistant.io/badges/blueprint_import.svg)](https://my.home-assistant.io/redirect/blueprint_import/?url=https%3A%2F%2Fgithub.com%2Fvdamboeck%2Fhomepod-ha-sensors%2Fblob%2Fmain%2Fblueprints%2Fhomepod_webhook_receiver.yaml)
 
 Nach dem Import:
 

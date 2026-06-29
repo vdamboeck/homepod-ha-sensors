@@ -52,12 +52,12 @@ Full step-by-step instructions: [`docs/02_homeassistant_setup.md`](docs/02_homea
 ### Trigger Blueprint
 Polls your HomePod(s) on a configurable interval by toggling a Boolean Helper that is exposed via HomeKit Bridge.
 
-[![Import Trigger Blueprint](https://my.home-assistant.io/badges/blueprint_import.svg)](https://my.home-assistant.io/redirect/blueprint_import/?url=https%3A%2F%2Fraw.githubusercontent.com%2Fvdamboeck%2Fhomepod-ha-sensors%2Fmain%2Fblueprints%2Fhomepod_trigger.yaml)
+[![Import Trigger Blueprint](https://my.home-assistant.io/badges/blueprint_import.svg)](https://my.home-assistant.io/redirect/blueprint_import/?url=https%3A%2F%2Fgithub.com%2Fvdamboeck%2Fhomepod-ha-sensors%2Fblob%2Fmain%2Fblueprints%2Fhomepod_trigger.yaml)
 
 ### Webhook Receiver Blueprint
 Receives a single JSON payload with data from all your HomePods and writes each value into the corresponding numeric helper.
 
-[![Import Webhook Blueprint](https://my.home-assistant.io/badges/blueprint_import.svg)](https://my.home-assistant.io/redirect/blueprint_import/?url=https%3A%2F%2Fraw.githubusercontent.com%2Fvdamboeck%2Fhomepod-ha-sensors%2Fmain%2Fblueprints%2Fhomepod_webhook_receiver.yaml)
+[![Import Webhook Blueprint](https://my.home-assistant.io/badges/blueprint_import.svg)](https://my.home-assistant.io/redirect/blueprint_import/?url=https%3A%2F%2Fgithub.com%2Fvdamboeck%2Fhomepod-ha-sensors%2Fblob%2Fmain%2Fblueprints%2Fhomepod_webhook_receiver.yaml)
 
 ## Documentation
 
